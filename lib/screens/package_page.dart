@@ -179,11 +179,11 @@ class PackagePage extends StatelessWidget {
                     padding: EdgeInsets.all(6),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.deepOrange),
+                        color: Color.fromARGB(255, 240, 191, 176)),
                     child: Text(
                       'Price: ₹$price',
-                      style: TextStyle(
-                          color: Colors.white,
+                      style: const  TextStyle(
+                          color: Colors.black,
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.start,
@@ -207,7 +207,12 @@ class PackagePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CartPage(source: source,dest: dest,img: img,price: price,),
+                        builder: (context) => CartPage(
+                          source: source,
+                          dest: dest,
+                          img: img,
+                          price: price,
+                        ),
                       ),
                     );
                   },

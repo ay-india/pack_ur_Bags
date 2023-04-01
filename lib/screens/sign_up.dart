@@ -116,26 +116,37 @@ class _RegisterPageState extends State<RegisterPage> {
                         setState(() {
                           loading = true;
                         });
-                        _auth
-                            .createUserWithEmailAndPassword(
-                                email: emailController.text.toString(),
-                                password: passwordController.text.toString())
-                            .then((value) {
-                          Utils().toastMessage(value.user!.email.toString() +
-                              " registered Successfully.");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()));
-                          setState(() {
-                            loading = false;
-                          });
-                        }).onError((error, stackTrace) {
-                          Utils().toastMessage(error.toString());
-                          setState(() {
-                            loading = false;
-                          });
-                        });
+                        passwordController.text.toString() ==
+                                confirmPasswordController.text.toString()
+                            ? _auth
+                                .createUserWithEmailAndPassword(
+                                    email: emailController.text.toString(),
+                                    password:
+                                        passwordController.text.toString())
+                                .then((value) {
+                                Utils().toastMessage(
+                                    value.user!.email.toString() +
+                                        " registered Successfully.");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()));
+                                setState(() {
+                                  loading = false;
+                                });
+                              }).onError((error, stackTrace) {
+                                Utils().toastMessage(error.toString());
+                                setState(() {
+                                  loading = false;
+                                });
+                              })
+                            : {
+                                Utils().toastMessage(
+                                    "Password and confirm Password are not same"),
+                                setState(() {
+                                  loading = false;
+                                })
+                              };
                       },
                       child: Container(
                         // color: Colors.orange,
